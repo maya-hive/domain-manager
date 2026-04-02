@@ -22,7 +22,13 @@ http.route({
 
         const domains = await ctx.runQuery(api.domains.getDomains);
 
-        return new Response(JSON.stringify(domains), {
+        const payload = domains.map((d) => ({
+            _id: d._id,
+            domainName: d.domainName,
+            expireDate: d.expireDate,
+        }));
+
+        return new Response(JSON.stringify(payload), {
             status: 200,
             headers: { "Content-Type": "application/json" },
         });
@@ -30,7 +36,7 @@ http.route({
 });
 
 http.route({
-    path: "/api/update-domain-expiry",
+    path: "/api/domains/update-expire",
     method: "POST",
     handler: httpAction(async (ctx, req) => {
         if (!verifyApiKey(req)) {
