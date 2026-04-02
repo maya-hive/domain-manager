@@ -46,11 +46,34 @@ http.route({
             });
         }
 
-        const body = await req.json();
-        const { domainName, expireDate } = body as {
-            domainName: string;
-            expireDate: number;
-        };
+        let domainName: string | undefined;
+        let expireDate: number | undefined;
+
+        const contentType = req.headers.get("content-type") ?? "";
+
+        if (contentType.includes("multipart/form-data") || contentType.includes("application/x-www-form-urlencoded")) {
+            const form = await req.formData();
+            domainName = form.get("domainName")?.toString();
+            const raw = form.get("expireDate")?.toString();
+            expireDate = raw ? Number(raw) : undefined;
+        } else {
+            try {
+                const parsed = await req.json();
+                domainName = parsed.domainName;
+                expireDate = typeof parsed.expireDate === "number"
+                    ? parsed.expireDate
+                    : Number(parsed.expireDate);
+            } catch {
+                return new Response(
+                    JSON.stringify({ error: "Invalid request body" }),
+                    { status: 400, headers: { "Content-Type": "application/json" } },
+                );
+            }
+        }
+
+        if (expireDate !== undefined && isNaN(expireDate)) {
+            expireDate = undefined;
+        }
 
         if (!domainName || typeof expireDate !== "number") {
             return new Response(
@@ -71,7 +94,7 @@ http.route({
         } catch (error) {
             const message = error instanceof Error ? error.message : "Unknown error";
             return new Response(JSON.stringify({ error: message }), {
-                status: 404,
+                status: 500,
                 headers: { "Content-Type": "application/json" },
             });
         }

@@ -57,9 +57,13 @@ export const updateExpireByName = internalMutation({
             .query("domains")
             .withIndex("by_domainName", (q) => q.eq("domainName", args.domainName))
             .unique();
-        if (!domain) {
-            throw new Error(`Domain not found: ${args.domainName}`);
+        if (domain) {
+            await ctx.db.patch(domain._id, { expireDate: args.expireDate });
+        } else {
+            await ctx.db.insert("domains", {
+                domainName: args.domainName,
+                expireDate: args.expireDate,
+            });
         }
-        await ctx.db.patch(domain._id, { expireDate: args.expireDate });
     },
 });
