@@ -6,11 +6,12 @@ import {
     useNavigate,
     useLocation,
 } from "@tanstack/react-router";
-import { Globe, Server, Users, Building2, LogOut, Loader2 } from "lucide-react";
+import { LayoutDashboard, Globe, Server, Users, Building2, LogOut, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/auth";
 
 const allNavItems = [
+    { to: "/" as const, label: "Dashboard", icon: LayoutDashboard, adminOnly: false },
     { to: "/domains" as const, label: "Domains", icon: Globe, adminOnly: false },
     { to: "/hosting" as const, label: "Hosting", icon: Server, adminOnly: false },
     { to: "/clients" as const, label: "Clients", icon: Building2, adminOnly: false },
@@ -58,7 +59,7 @@ function DashboardLayout() {
                 <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
                     <div className="flex items-center gap-8">
                         <Link
-                            to="/domains"
+                            to="/"
                             className="text-lg font-bold tracking-tight"
                         >
                             Domain Manager

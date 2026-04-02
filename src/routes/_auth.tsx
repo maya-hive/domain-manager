@@ -13,7 +13,7 @@ function AuthLayout() {
 
     useEffect(() => {
         if (!isLoading && user) {
-            navigate({ to: "/domains" });
+            navigate({ to: "/" });
         }
     }, [isLoading, user, navigate]);
 
