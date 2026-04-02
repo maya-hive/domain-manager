@@ -56,7 +56,7 @@ export const updateExpireByName = internalMutation({
         const domain = await ctx.db
             .query("domains")
             .withIndex("by_domainName", (q) => q.eq("domainName", args.domainName))
-            .unique();
+            .first();
         if (domain) {
             await ctx.db.patch(domain._id, { expireDate: args.expireDate });
         } else {
