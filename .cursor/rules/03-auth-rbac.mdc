@@ -1,0 +1,11 @@
+---
+description: Authentication and Role-Based Access Control rules
+globs: *.tsx, *.ts
+---
+# Authentication & RBAC
+
+- **No Third-Party Auth:** Do not suggest or implement Clerk, Auth0, etc. Use custom token-based auth stored in the Convex `sessions` table.
+- **Roles:** `Admin` and `Editor`.
+- **Permissions:** - `Admin` has full access to all routes including `/users`.
+  - `Editor` can access `/domains`, `/hosting`, and `/clients`.
+- **Enforcement:** Protect routes using TanStack Start loaders/middleware by verifying the `tokenIdentifier` and session expiry.

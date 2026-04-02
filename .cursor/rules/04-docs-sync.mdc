@@ -1,0 +1,13 @@
+---
+description: Mandatory documentation updates alongside code generation
+globs: *.ts, *.tsx, *.js, *.jsx
+---
+# Continuous Documentation Rule
+
+- **Always Sync Docs:** Whenever you create a new feature, update an existing component, or modify a database schema/mutation, you MUST simultaneously update the corresponding documentation file in the `.cursor/docs/` directory.
+- **Create New Docs:** If you generate code for a completely new module or feature that doesn't fit into the existing `docs/` files, create a new markdown file in `.cursor/docs/` following the existing naming convention (e.g., `08-new-feature.md`).
+- **What to Update:**
+  - **Status:** Mark tasks as complete when finished.
+  - **Technical Details:** Add specific implementation details, new API endpoints, database index usage, or complex logic explanations to the document.
+  - **Dependencies:** If a new package or internal utility was created, document its usage in the relevant module doc.
+- **Execution Order:** Always write or modify the code first, verify it works, and immediately follow up by updating the documentation in the same workflow. Do not wait for a prompt to update the docs.

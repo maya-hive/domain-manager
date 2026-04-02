@@ -1,0 +1,10 @@
+---
+description: Core technology stack and database rules
+globs: *
+---
+# Tech Stack Guidelines
+
+- **Frontend:** TanStack Start (React, Server-Side Rendering).
+- **Backend/Database:** Convex.
+- **Data Mutation:** Always use Convex mutations (`insert`, `patch`, `delete`) as defined in the schema.
+- **Querying:** Use Convex queries with appropriate indexing (e.g., `.withIndex()`) for performance.

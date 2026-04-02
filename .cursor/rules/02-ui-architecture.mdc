@@ -1,0 +1,9 @@
+---
+description: UI/UX layout and interaction guidelines
+globs: *.tsx, *.ts
+---
+# UI Architecture Rules
+
+- **Layout:** Use a Top Navigation bar for all protected routes. Do not use a sidebar.
+- **Data Entry:** Always use Popup Modals for adding or editing data (Domains, Hostings, Clients, Users). Do not navigate away to separate forms or pages.
+- **State Management:** Manage modal state locally within the respective module components.
