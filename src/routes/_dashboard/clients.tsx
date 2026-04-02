@@ -193,8 +193,8 @@ function ClientsPage() {
             </div>
 
             {modalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setModalOpen(false)}>
-                    <div className="w-full max-w-md rounded-lg bg-card p-6 shadow-xl" onClick={(e) => e.stopPropagation()}>
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+                    <div className="w-full max-w-md rounded-lg bg-card p-6 shadow-xl">
                         <div className="mb-4 flex items-center justify-between">
                             <h2 className="text-lg font-semibold">{editId ? "Edit Client" : "Add Client"}</h2>
                             <button onClick={() => setModalOpen(false)} className="rounded p-1 hover:bg-accent"><X className="h-4 w-4" /></button>
